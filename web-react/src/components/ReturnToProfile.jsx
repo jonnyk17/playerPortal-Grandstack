@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {USER_EVENTS_FRAGMENT} from "./UserEvents"
+
 export function ReturnToProfile(props) {
   return (
     <div className="base-container" ref={props.containerRef}>

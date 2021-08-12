@@ -28,13 +28,12 @@ import {
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import Button from "@material-ui/core/Button";
 import { useAuth0 } from "@auth0/auth0-react";
-import { PrivateRoute, LogoutButton } from "./components";
+import { PrivateRoute} from "./components";
 import {
   Dashboard,
   CheckLogin,
   UserList,
   Login,
-  AddEvent,
   Callback,
   Register,
 } from "./pages";
