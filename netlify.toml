@@ -1,5 +1,5 @@
 [build]
-  command = "cd api && npm i && cd ../web-react && npm i && npm run build && cd .. && cp api/build/graphql-schema.js api/build/functions/graphql/. && cp api/build/schema.graphql api/build/functions/graphql/.  && cd api/src/functions/graphql && npm i"
+  command = "cd api && npm i && npm run build && cd ../web-react && npm i && npm run build && cd .. && cp api/build/graphql-schema.js api/build/functions/graphql/. && cp api/build/schema.graphql api/build/functions/graphql/.  && cd api/src/functions/graphql && npm i"
   publish = "web-react/build"
   functions = "api/build/functions"
 
