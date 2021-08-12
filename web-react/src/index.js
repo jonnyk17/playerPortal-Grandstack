@@ -13,8 +13,8 @@ const client = new ApolloClient({
 const Main = () => (
   <ApolloProvider client={client}>
     <Auth0Provider
-      domain="dev-jxxen9p2.us.auth0.com"
-      clientId="s0lnhSpSrLXkQ5oYTfNisNkS6tjtoSt0"
+      domain={process.env.REACT_APP_AUTH0_DOMAIN}
+      clientId={process.env.REACT_APP_AUTH0_CLIENT_ID}
       redirectUri={"http://localhost:3000/callback"}
      //redirectUri={"https://playerportal.netlify.app/#/callback"}
     >
