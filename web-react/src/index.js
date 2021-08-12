@@ -6,7 +6,7 @@ import { Auth0Provider } from '@auth0/auth0-react';
 
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4001/graphql',
+  uri: process.env.REACT_APP_GRAPHQL_URI,
   cache: new InMemoryCache(),
 })
 
