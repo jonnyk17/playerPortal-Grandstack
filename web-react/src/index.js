@@ -10,7 +10,9 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 })
 
-const Main = () => (
+const Main = () => 
+{console.log(process.env.REACT_AUTH0_REDIRECT_URI)
+  return (
   <ApolloProvider client={client}>
     <Auth0Provider
       domain={process.env.REACT_APP_AUTH0_DOMAIN}
@@ -20,6 +22,6 @@ const Main = () => (
       <App />
     </Auth0Provider>
   </ApolloProvider>
-)
+)}
 
 ReactDOM.render(<Main />, document.getElementById('root'))
