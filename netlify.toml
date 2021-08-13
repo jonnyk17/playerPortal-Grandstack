@@ -5,9 +5,6 @@
 
 [dev]
   command = "npm start"
-
-[template.environment]
-  REACT_APP_GRAPHQL_URI="/.netlify/functions/graphql"
   
 [[redirects]]
   from = "/graphql"
