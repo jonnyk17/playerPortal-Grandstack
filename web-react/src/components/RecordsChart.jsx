@@ -30,16 +30,15 @@ export function RecordsChart({
   const [filterState, setFilterState] = React.useState("");
   const [eventState, setEventState] = React.useState("");
 
-  // eventArr
-  console.log(user)
   const events = user.Records.map((row) => row.event.event);
 
   const getUserAvg = () => {
-    const  { event: { eventType }}  = user.Records.find((e) => e.event.event === eventState);
+    const {
+      event: { eventType },
+    } = user.Records.find((e) => e.event.event === eventState);
     const recState = user.Records.find((e) => e.event.event === eventState);
-    console.log(recState)
+
     if (eventType === "solid" || eventType === "sec") {
-     
       return Number(recState.record);
     } else if (eventType === "min") {
       const [minute, second] = recState.record.split(":");
@@ -54,7 +53,9 @@ export function RecordsChart({
 
   const getGlobalAvg = () => {
     var total = 0;
-    const  { event: { eventType }}  = user.Records.find((e) => e.event.event === eventState);
+    const {
+      event: { eventType },
+    } = user.Records.find((e) => e.event.event === eventState);
     if (eventType === "solid" || eventType === "sec") {
       for (const record of records) {
         total += Number(record.record);
@@ -97,24 +98,20 @@ export function RecordsChart({
         name="Select age/sport"
         list={["Age", "Sport"]}
         value={filterState}
-        handleChange={
-          (e) => {
-            onAgeSportFilterChange(e.target.value, eventState);
-            setFilterState(e.target.value);
-          }
-        }
+        handleChange={(e) => {
+          onAgeSportFilterChange(e.target.value, eventState);
+          setFilterState(e.target.value);
+        }}
       />
 
       <SimpleSelect
         name="Select Event"
         list={events}
         value={eventState}
-        handleChange={
-          (e) => {
-            onEventFilterChange(e.target.value, filterState);
-            setEventState(e.target.value);
-          }
-        }
+        handleChange={(e) => {
+          onEventFilterChange(e.target.value, filterState);
+          setEventState(e.target.value);
+        }}
       />
       <ResponsiveContainer>
         <div className="chart">

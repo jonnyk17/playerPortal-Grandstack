@@ -1,5 +1,5 @@
 import React from "react";
-import { AddEvent } from './AddEvent'
+import { AddEvent } from "./AddEvent";
 import { ReturnToProfile } from "../components";
 
 export class addEventPage extends React.Component {

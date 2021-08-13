@@ -9,15 +9,14 @@ export function RecordPane({ record, setRecord, type, ...props }) {
 
   const handleChange = (e) => {
     setSecState(e.target.value);
-    setRecord(minState + ":" + e.target.value)
+    setRecord(minState + ":" + e.target.value);
   };
   const handleHourChange = (e) => {
     setSecState(e.target.value);
-    setRecord(hourState + ":" + minState + ":" + e.target.value)
+    setRecord(hourState + ":" + minState + ":" + e.target.value);
   };
-  if(type)
-    type=type.type
-  console.log(type)
+  if (type) type = type.type;
+
   if (type === "solid") {
     return (
       <div className="form-group">
@@ -33,57 +32,58 @@ export function RecordPane({ record, setRecord, type, ...props }) {
     );
   } else if (type === "sec" || type === "min" || type === "hour") {
     return (
-    <div className="form-group">
-      <Grid
-        container
-        spacing={1}
-        direction="row"
-        justifyContent="space-between"
-      >
-        {type === "hour" && (
+      <div className="form-group">
+        <Grid
+          container
+          spacing={1}
+          direction="row"
+          justifyContent="space-between"
+        >
+          {type === "hour" && (
+            <Grid item xs>
+              <input
+                style={{ width: "100%" }}
+                type="text"
+                name="hour"
+                placeholder="Hours"
+                value={hourState}
+                onChange={(e) => setHourState(e.target.value)}
+              />
+            </Grid>
+          )}
+          {(type === "min" || type === "hour") && (
+            <Grid item xs>
+              <input
+                style={{ width: "100%" }}
+                type="text"
+                name="min"
+                placeholder="Minutes"
+                value={minState}
+                onChange={(e) => setMinState(e.target.value)}
+              />
+            </Grid>
+          )}
           <Grid item xs>
             <input
               style={{ width: "100%" }}
               type="text"
-              name="hour"
-              placeholder="Hours"
-              value={hourState}
-              onChange={(e) => setHourState(e.target.value)}
+              name="sec"
+              placeholder="Seconds"
+              value={type === "sec" ? record : secState}
+              onChange={(e) => {
+                if (type === "sec") {
+                  setRecord(e.target.value);
+                } else if (type === "min") {
+                  handleChange(e);
+                } else if (type === "hour") {
+                  handleHourChange(e);
+                }
+              }}
             />
           </Grid>
-        )}
-        {(type === "min" || type === "hour") && (
-          <Grid item xs>
-            <input
-              style={{ width: "100%" }}
-              type="text"
-              name="min"
-              placeholder="Minutes"
-              value={minState}
-              onChange={(e) => setMinState(e.target.value)}
-            />
-          </Grid>
-        )}
-        <Grid item xs>
-          <input
-            style={{ width: "100%" }}
-            type="text"
-            name="sec"
-            placeholder="Seconds"
-            value={type === "sec" ? record : secState}
-            onChange={(e) => {
-              if (type === "sec") {
-                setRecord(e.target.value)
-              } else if (type === "min") {
-                handleChange(e);
-              } else if (type === "hour") {
-                handleHourChange(e);
-              }
-            }}
-          />
         </Grid>
-      </Grid>
-    </div>
-     ) }
+      </div>
+    );
+  }
   return <div>No event selected</div>;
 }

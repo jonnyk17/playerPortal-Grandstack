@@ -3,10 +3,9 @@ import React from "react";
 import { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useHistory } from "react-router-dom";
-import { USER_EXISTS} from "../components/PrivateRoute"
+import { USER_EXISTS } from "../components/PrivateRoute";
 import { GET_USERS } from "./Callback";
 import { CREATE_USER } from "../graphql/mutations";
-
 
 export function Register() {
   const history = useHistory();

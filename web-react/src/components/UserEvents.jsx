@@ -8,7 +8,7 @@ import { Title } from ".";
 import { gql } from "@apollo/client";
 
 export const USER_EVENTS_FRAGMENT = gql`
-  fragment UserEvents on User{
+  fragment UserEvents on User {
     Records {
       record
       event {
@@ -16,7 +16,7 @@ export const USER_EVENTS_FRAGMENT = gql`
       }
     }
   }
-`
+`;
 
 export function UserEvents({ user: { Records } }) {
   return (
@@ -30,12 +30,12 @@ export function UserEvents({ user: { Records } }) {
           </TableRow>
         </TableHead>
         <TableBody>
-            {Records.map((element) => (
-              <TableRow key={element.event.event}>
-                <TableCell>{element.event.event}</TableCell>
-                <TableCell align="right"> {element.record}</TableCell>
-              </TableRow>
-            ))}
+          {Records.map((element) => (
+            <TableRow key={element.event.event}>
+              <TableCell>{element.event.event}</TableCell>
+              <TableCell align="right"> {element.record}</TableCell>
+            </TableRow>
+          ))}
         </TableBody>
       </Table>
     </>

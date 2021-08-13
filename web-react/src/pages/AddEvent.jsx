@@ -12,7 +12,6 @@ import {
   DELETE_RECORDS,
 } from "../graphql/mutations";
 
-
 const event = [
   {
     name: "100m",
@@ -217,7 +216,7 @@ export function AddEvent() {
         refetchQueries: [
           {
             query: GET_EVENTS,
-          }
+          },
         ],
       });
       setSnackbar({ severity: "success", message: "Event Added" });
@@ -271,7 +270,6 @@ export function AddEvent() {
       });
       setSnackbar({ severity: "success", message: "Event Added" });
     } else {
-      
       setSnackbar({ severity: "error", message: "Fill All Fields" });
     }
   };
@@ -294,15 +292,16 @@ export function AddEvent() {
             name="Select"
             list={eventList}
             value={formState.event}
-            handleChange={(e) =>
-              { var t= event.find((eventField) => eventField.name === e.target.value)
-                setFormState({
+            handleChange={(e) => {
+              var t = event.find(
+                (eventField) => eventField.name === e.target.value
+              );
+              setFormState({
                 ...formState,
                 event: e.target.value,
                 recordType: t.type,
-              })
-            }
-            }
+              });
+            }}
           />
           <div className="form-group">
             <RecordPane

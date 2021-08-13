@@ -12,13 +12,15 @@ export function Login() {
         </div>
       </div>
       <div className="footer">
-        {
-      !isAuthenticated && (
-      <button type="button" className="btn" onClick={() => loginWithRedirect()}>
-        Log In
-      </button>
-    )
-    }
+        {!isAuthenticated && (
+          <button
+            type="button"
+            className="btn"
+            onClick={() => loginWithRedirect()}
+          >
+            Log In
+          </button>
+        )}
       </div>
     </div>
   );

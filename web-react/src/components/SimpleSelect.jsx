@@ -1,8 +1,8 @@
-import React from 'react'
-import Select from '@material-ui/core/Select'
-import MenuItem from '@material-ui/core/MenuItem'
-import InputLabel from '@material-ui/core/InputLabel'
-import { makeStyles } from '@material-ui/core/styles'
+import React from "react";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import InputLabel from "@material-ui/core/InputLabel";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   selectWrapper: {
@@ -10,15 +10,15 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 200,
   },
   select: {
-    width: '100%',
+    width: "100%",
   },
   formGroup: {
-    display: 'flex',
-    justifyContent: 'flex-end',
+    display: "flex",
+    justifyContent: "flex-end",
   },
-}))
-export function SimpleSelect({name, value, handleChange, list, ...props}) {
-  const classes = useStyles()
+}));
+export function SimpleSelect({ name, value, handleChange, list, ...props }) {
+  const classes = useStyles();
 
   return (
     <div className={classes.formGroup}>
@@ -36,7 +36,7 @@ export function SimpleSelect({name, value, handleChange, list, ...props}) {
             </MenuItem>
           ))}
         </Select>
-        </div>
+      </div>
     </div>
-  )
+  );
 }

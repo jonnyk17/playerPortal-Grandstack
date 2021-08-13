@@ -5,7 +5,6 @@ scalar PointInput
 type User {
   displayName: String!
   userName: String!
-  #password: String!
   Sport: String!
   Age: String!
   id: String!
@@ -13,32 +12,22 @@ type User {
   Weight: String!
   Event: [Events] @relationship(type: "COMPETED", direction: OUT)
   Records: [Record] @relationship(type: "PERSONALBEST", direction: OUT)
-  
 }
 type Events {
   event: String!
-  eventType:String!
+  eventType: String!
   user: User @relationship(type: "COMPETED", direction: IN)
   record: Record @relationship(type: "RECORDFOREVENT", direction: IN)
 }
-type Record{
+type Record {
   record: String!
-  user:User @relationship(type: "PERSONALBEST", direction: IN)
-  event:Events @relationship(type: "RECORDFOREVENT", direction: OUT)
-
+  user: User @relationship(type: "PERSONALBEST", direction: IN)
+  event: Events @relationship(type: "RECORDFOREVENT", direction: OUT)
 }
-
-
 
 type Query {
-  User(userName: String!): [Events]  @cypher(statement: "MATCH (u:User {userName: $userName})->[:PERSONALBEST]-(r:Record)->[:RECORDFOREVENT]-(event:Events) RETURN event, r")
-
-
-  #   # userCount: Int! @cypher(statement: "MATCH (u:User) RETURN COUNT(u)")
-  #   # ratingsCount: [RatingCount]
-  #   #   @cypher(
-  #   #     statement: "MATCH (r:Review) WITH r.stars AS stars, COUNT(*) AS count ORDER BY stars RETURN {stars: stars, count: count}"
-  #   #   )
+  User(userName: String!): [Events]
+    @cypher(
+      statement: "MATCH (u:User {userName: $userName})->[:PERSONALBEST]-(r:Record)->[:RECORDFOREVENT]-(event:Events) RETURN event, r"
+    )
 }
-
-

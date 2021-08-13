@@ -39,7 +39,7 @@ export function Dashboard() {
   const { data, loading, error, refetch } = useQuery(DASHBOARD_QUERY, {
     variables: { id: user.sub },
     skip: isLoading,
-    fetchPolicy: "network-only"
+    fetchPolicy: "network-only",
   });
   const theme = useTheme();
 
@@ -85,8 +85,8 @@ export function Dashboard() {
               user={dataUser}
               records={data.records}
               onAgeSportFilterChange={(filterType, eventState) => {
-                if (filterType !== "")
-                  {refetch({
+                if (filterType !== "") {
+                  refetch({
                     recordsWhere: {
                       event: {
                         event: eventState,
@@ -95,11 +95,12 @@ export function Dashboard() {
                         [filterType]: dataUser[filterType],
                       },
                     },
-                  });}
+                  });
+                }
               }}
               onEventFilterChange={(Event, filterType) => {
-                if (filterType !== "")
-                 { refetch({
+                if (filterType !== "") {
+                  refetch({
                     recordsWhere: {
                       event: {
                         event: Event,
@@ -108,7 +109,8 @@ export function Dashboard() {
                         [filterType]: data.users[0][filterType],
                       },
                     },
-                  });}
+                  });
+                }
               }}
             />
           </Paper>

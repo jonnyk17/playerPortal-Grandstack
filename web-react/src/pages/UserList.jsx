@@ -13,25 +13,27 @@ import {
   TableSortLabel,
   TextField,
 } from "@material-ui/core";
-import { Title, SimpleSelect } from '../components'
+import { Title, SimpleSelect } from "../components";
 const GET_USERS_AND_EVENTS = gql`
   query usersPaginateQuery(
     $first: Int
     $offset: Int
     $orderBy: [UserSort]
-     $displayNameContains: String
-     $eventContains:String
-    
+    $displayNameContains: String
+    $eventContains: String
   ) {
     users(
       options: { limit: $first, skip: $offset, sort: $orderBy }
-      where: {displayName_CONTAINS: $displayNameContains, Event:{event_CONTAINS:  $eventContains}}
+      where: {
+        displayName_CONTAINS: $displayNameContains
+        Event: { event_CONTAINS: $eventContains }
+      }
     ) {
       displayName
       Age
       Sport
 
-      Records(where: {event:{event:  $eventContains}}) {
+      Records(where: { event: { event: $eventContains } }) {
         record
       }
       Event {
@@ -43,9 +45,7 @@ const GET_USERS_AND_EVENTS = gql`
       event
     }
   }
- 
 `;
-
 
 const styles = (theme) => ({
   root: {
@@ -65,7 +65,6 @@ const styles = (theme) => ({
   },
 });
 
-
 function _UserList(props) {
   const { classes } = props;
   const [order, setOrder] = React.useState("ASC");
@@ -75,16 +74,18 @@ function _UserList(props) {
   const [filterState, setFilterState] = React.useState("");
   const [eventState, setEventState] = React.useState("");
 
-  const { loading, data, error, refetch, networkStatus } = useQuery(GET_USERS_AND_EVENTS, {
-    variables: {
-      first: rowsPerPage,
-      offset: rowsPerPage * page,
-      orderBy: { [orderBy]: order },
-      eventContains: "",
-      recordsWhere: {}
+  const { loading, data, error, refetch, networkStatus } = useQuery(
+    GET_USERS_AND_EVENTS,
+    {
+      variables: {
+        first: rowsPerPage,
+        offset: rowsPerPage * page,
+        orderBy: { [orderBy]: order },
+        eventContains: "",
+        recordsWhere: {},
+      },
     }
-
-  });
+  );
 
   const handleSortRequest = (property) => {
     const newOrderBy = property;
@@ -100,25 +101,27 @@ function _UserList(props) {
 
   const handleFilterChange = (event) => {
     const val = event.target.value;
-    setFilterState(val)
+    setFilterState(val);
     refetch({
-      displayNameContains: val
-
-    })
+      displayNameContains: val,
+    });
   };
 
   const eventFilter = async (event) => {
     const val = event;
-    setEventState(val)
+    setEventState(val);
     refetch({
-
-      eventContains: val
-
-    })
+      eventContains: val,
+    });
   };
 
   if (error) return <p>Error</p>;
-  if (loading && NetworkStatus.refetch !== networkStatus && NetworkStatus.setVariables !== networkStatus) return <p>Loading</p>;
+  if (
+    loading &&
+    NetworkStatus.refetch !== networkStatus &&
+    NetworkStatus.setVariables !== networkStatus
+  )
+    return <p>Loading</p>;
   return (
     <Paper className={classes.root}>
       <Title>Search Athletes</Title>
@@ -149,7 +152,7 @@ function _UserList(props) {
 
       {loading && !error && <p>Loading...</p>}
       {error && !loading && <p>Error</p>}
-      {data && !loading && !error && !loading &&
+      {data && !loading && !error && !loading && (
         <Table className={classes.table}>
           <TableHead>
             <TableRow>
@@ -184,13 +187,18 @@ function _UserList(props) {
                   </TableCell>
                   <TableCell>{n.Age}</TableCell>
                   <TableCell>{n.Sport}</TableCell>
-                  <TableCell>{String(eventState) !== "" ? String(eventState) : ""}</TableCell>
-                  <TableCell>{n.Records.length !== 0 ? n.Records[0].record : ""}</TableCell>
+                  <TableCell>
+                    {String(eventState) !== "" ? String(eventState) : ""}
+                  </TableCell>
+                  <TableCell>
+                    {n.Records.length !== 0 ? n.Records[0].record : ""}
+                  </TableCell>
                 </TableRow>
               );
             })}
           </TableBody>
-        </Table>}
+        </Table>
+      )}
     </Paper>
   );
 }

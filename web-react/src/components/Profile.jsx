@@ -16,16 +16,15 @@ const useStyles = makeStyles({
   },
 });
 
-
 export const PROFILE_FRAGMENT = gql`
-  fragment ProfileFragment on User{
+  fragment ProfileFragment on User {
     displayName
     Age
     Height
     Weight
     Sport
   }
-`
+`;
 
 export function Profile({ user: { displayName, Age, Height, Weight, Sport } }) {
   const classes = useStyles();
